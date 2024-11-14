@@ -8,6 +8,7 @@ const common: LibConfig = {
       jsOptions: {
         minimizerOptions: {
           compress: true,
+          module: true,
         },
       },
     },
