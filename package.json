@@ -1,7 +1,7 @@
 {
   "name": "tiny-deep-equal",
-  "version": "0.0.1",
-  "description": "Create Tistory Skin with React.js",
+  "version": "0.0.3",
+  "description": "Tiny & Fast deep-equal check with various ES6 objects.",
   "bugs": "https://github.com/eunbae0/tiny-deep-equal/issues",
   "repository": {
     "type": "git",
