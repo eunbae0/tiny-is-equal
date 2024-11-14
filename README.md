@@ -13,10 +13,12 @@
 
 ## Install
 
+- Requirements: `Node>=16.19.0`
+
 ```shell
 $ yarn add tiny-deep-equal // yarn
 $ npm install tiny-deep-equal --save // npm
-$ pnpm add tiny-deep-equal // pnpm
+$ pnpm install tiny-deep-equal // pnpm
 ```
 
 ## Usage

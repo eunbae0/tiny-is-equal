@@ -1,4 +1,3 @@
-/* @prettier */
 import { run, bench, summary } from 'mitata';
 
 import { isEqual as underscoreIsEqual } from 'underscore';
@@ -47,7 +46,7 @@ console.log('underscore: ', underscoreIsEqual(obj1, obj2));
 console.log('lodash: ', lodashIsEqual(obj1, obj2));
 console.log('ramda: ', ramdaEquals(obj1, obj2));
 console.log('deep-eql: ', deepEql(obj1, obj2));
-console.log('deep-equal: ', deepEqual(obj1, obj2));
+console.log('deep-equal: ', deepEqual(obj1, obj2)); // false
 console.log('es-toolkit: ', esToolkitisEqual(obj1, obj2));
 console.log('fast-deep-equal: ', fastDeepEqual(obj1, obj2));
 console.log('tiny-deep-equal: ', tinyDeepEqual(obj1, obj2));
