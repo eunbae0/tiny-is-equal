@@ -1,4 +1,4 @@
-import { equal } from '../src';
+import equal from '../src';
 import { describe, it, expect } from 'vitest';
 
 describe('equal', () => {
