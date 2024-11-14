@@ -97,4 +97,4 @@ $ pnpm run test
 
 ## License
 
-MIT
+[MIT](https://github.com/eunbae0/tiny-deep-equal/blob/main/LICENSE)
