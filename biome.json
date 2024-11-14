@@ -36,7 +36,8 @@
         "noSelfCompare": "off"
       },
       "complexity": {
-        "noBannedTypes": "off"
+        "noBannedTypes": "off",
+        "noForEach": "off"
       }
     }
   }
