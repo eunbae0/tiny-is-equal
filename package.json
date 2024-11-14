@@ -25,12 +25,13 @@
     "dev": "rslib build --watch",
     "format": "biome format --write",
     "test": "vitest run",
-    "benchmark:performance": "node benchmark/performance.js --expose-gc"
+    "benchmark:performance": "node benchmark/performance.cjs benchmark/performance.mjs --expose-gc"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.3",
     "@rslib/core": "^0.0.18",
     "@types/node": "^22.8.1",
+    "benchmark": "^2.1.4",
     "deep-eql": "^5.0.2",
     "deep-equal": "^2.2.3",
     "es-toolkit": "^1.27.0",
