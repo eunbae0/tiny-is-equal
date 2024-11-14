@@ -2,11 +2,13 @@
 
 > Tiny & Fast deep-equal check with various ES6 objects.
 
+[![NPM version](https://img.shields.io/npm/v/tiny-deep-equal.svg?style=flat)](https://www.npmjs.com/package/tiny-deep-equal) [![monthly downloads](https://img.shields.io/npm/dm/tiny-deep-equal.svg?maxAge=3600)](https://npmjs.com/package/tiny-deep-equal)
+<a href="https://pkg-size.dev/tiny-deep-equal"><img src="https://pkg-size.dev/badge/bundle/1359" title="Bundle size for tiny-deep-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-deep-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-deep-equal/dist/index.js)
 
 - **No dependencies.**
-- **Tiny bundle size.** (NPM Minified: 1.5kB, Gzipped: **677B**)
-- Support for both CJS and ESM.
-- Typescript based code, support type declarations.
+- **Tiny bundle size.** (NPM Minified: **1.4kB**, Gzipped: **586B**)
+- Support for both **CJS and ESM**.
+- **Typescript** based code, support type declarations.
 - Comprehensive test coverage.
 
 ## Install
