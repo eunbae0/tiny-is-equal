@@ -1,19 +1,7 @@
+import type { TypedArray } from './types/typedArray';
 import { isTagMatch } from './utils/isTagMatch';
 
-type TypedArray =
-  | Int8Array
-  | Uint8Array
-  | Uint8ClampedArray
-  | Int16Array
-  | Uint16Array
-  | Int32Array
-  | Uint32Array
-  | Float32Array
-  | Float64Array
-  | BigInt64Array
-  | BigUint64Array;
-
-export const equal = <T>(a: T, b: T): boolean => {
+const equal = <T>(a: T, b: T): boolean => {
   if (a === b || Object.is(a, b)) return true;
 
   if (typeof a !== typeof b) return false;
@@ -143,3 +131,5 @@ export const equal = <T>(a: T, b: T): boolean => {
 
   return false;
 };
+
+export default equal;
