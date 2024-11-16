@@ -31,6 +31,8 @@ const sampleObj = {
   i: new Uint8Array(longArray).buffer,
   j: new Uint8Array(longArray),
   k: new DataView(new Uint8Array(longArray).buffer),
+  l: new WeakSet(),
+  m: new WeakMap(),
 };
 
 const obj1 = {
