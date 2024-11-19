@@ -87,10 +87,18 @@ const err2 = new Error('error!');
 expect(isEqual(err1, err2)) // true
 ```
 
-## BenchMark
+## BenchMarks
 
+Benchmark for complex use cases:
 ```shell
 $ pnpm run benchmark:performance
+
+tiny-is-equal x 612,580 ops/sec ±0.36% (98 runs sampled)
+fast-deep-equal x 662,205 ops/sec ±0.18% (97 runs sampled)
+underscore.isEqual x 526,323 ops/sec ±0.26% (98 runs sampled)
+lodash.isEqual x 314,708 ops/sec ±0.26% (99 runs sampled)
+es-toolkit.isEqual x 291,580 ops/sec ±1.70% (93 runs sampled)
+ramda.equals x 214,842 ops/sec ±0.50% (95 runs sampled)
 ```
 
 ## Test
