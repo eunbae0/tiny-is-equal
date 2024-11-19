@@ -1,13 +1,13 @@
 import { test, expect } from 'vitest';
-import { isTagMatch } from '../../src/utils/isTagMatch';
+import { getObjectTag } from '../../src/utils/getObjectTag';
 
-test('isTagMatch', () => {
-  expect(isTagMatch({ a: 1 }, 'Object')).toBe(true);
-  expect(isTagMatch(/(?:)/, 'RegExp')).toBe(true);
-  expect(isTagMatch(new Set(), 'Set')).toBe(true);
-  expect(isTagMatch(new WeakSet(), 'WeakSet')).toBe(true);
-  expect(isTagMatch(new Map(), 'Map')).toBe(true);
-  expect(isTagMatch(new WeakMap(), 'WeakMap')).toBe(true);
-  expect(isTagMatch(new Date(), 'Date')).toBe(true);
-  expect(isTagMatch(new Error(), 'Error')).toBe(true);
+test('getObjectTag', () => {
+  expect(getObjectTag({ a: 1 })).toBe('Object');
+  expect(getObjectTag(/(?:)/)).toBe('RegExp');
+  expect(getObjectTag(new Set())).toBe('Set');
+  expect(getObjectTag(new WeakSet())).toBe('WeakSet');
+  expect(getObjectTag(new Map())).toBe('Map');
+  expect(getObjectTag(new WeakMap())).toBe('WeakMap');
+  expect(getObjectTag(new Date())).toBe('Date');
+  expect(getObjectTag(new Error())).toBe('Error');
 });

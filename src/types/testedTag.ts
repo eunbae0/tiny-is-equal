@@ -8,4 +8,5 @@ export type TestedTags =
   | 'ArrayBuffer'
   | 'DataView'
   | 'Date'
-  | 'Error';
+  | 'Error'
+  | 'Array';
