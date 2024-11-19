@@ -1,0 +1,52 @@
+name: Deploy Package to NPM
+
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Semantic Tag'     
+        required: true
+        default: 'v1.0.0'
+        type: 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish_npm:
+    name: Publishing to NPM
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: write
+      contents: write
+
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: 'pnpm'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Bump Version of package.json
+        uses: ramonpaolo/bump-version@v2.3.1
+        with:
+          tag: ${{ inputs.tags }} # Accessing the context and get the reference_name, that in this case, is the tag that you created(ex: v1.0.0)
+          commit: true
+          branch_to_push: 'main'
+
+      - name: Publish package to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
