@@ -6,7 +6,7 @@ const { isEqual: lodashIsEqual } = require('lodash');
 const { equals: ramdaEquals } = require('ramda');
 const { isEqual: esToolkitisEqual } = require('es-toolkit');
 const fastDeepEqual = require('fast-deep-equal');
-const tinyDeepEqual = require('../dist/index.cjs').default;
+const tinyIsEqual = require('../dist/index.cjs').default;
 
 const longArray = Array.from({ length: 1000000 }, (_, i) => i);
 const longRegex =
@@ -45,24 +45,24 @@ console.log('lodash: ', lodashIsEqual(obj1, obj2));
 console.log('ramda: ', ramdaEquals(obj1, obj2));
 console.log('es-toolkit: ', esToolkitisEqual(obj1, obj2));
 console.log('fast-deep-equal: ', fastDeepEqual(obj1, obj2));
-console.log('tiny-deep-equal: ', tinyDeepEqual(obj1, obj2));
+console.log('tiny-is-equal: ', tinyIsEqual(obj1, obj2));
 
-suite.add('tiny-deep-equal', () => {
-  return tinyDeepEqual(obj1, obj2);
+suite.add('tiny-is-equal', () => {
+  return tinyIsEqual(obj1, obj2);
 });
 suite.add('fast-deep-equal', () => {
   return fastDeepEqual(obj1, obj2);
 });
-suite.add('underscore', () => {
+suite.add('underscore.isEqual', () => {
   return underscoreIsEqual(obj1, obj2);
 });
-suite.add('lodash', () => {
+suite.add('lodash.isEqual', () => {
   return lodashIsEqual(obj1, obj2);
 });
-suite.add('es-toolkit', () => {
+suite.add('es-toolkit.isEqual', () => {
   return esToolkitisEqual(obj1, obj2);
 });
-suite.add('ramda', () => {
+suite.add('ramda.equals', () => {
   return ramdaEquals(obj1, obj2);
 });
 

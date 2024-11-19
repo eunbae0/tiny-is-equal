@@ -8,7 +8,7 @@ import deepEql from 'deep-eql';
 import deepEqual from 'deep-equal';
 import { isEqual as esToolkitisEqual } from 'es-toolkit';
 import fastDeepEqual from 'fast-deep-equal';
-import tinyDeepEqual from '../dist/index.js';
+import tinyIsEqual from '../dist/index.js';
 
 const longArray = Array.from({ length: 1000000 }, (_, i) => i);
 const longRegex =
@@ -51,7 +51,7 @@ console.log('deep-eql: ', deepEql(obj1, obj2));
 console.log('deep-equal: ', deepEqual(obj1, obj2)); // false
 console.log('es-toolkit: ', esToolkitisEqual(obj1, obj2));
 console.log('fast-deep-equal: ', fastDeepEqual(obj1, obj2));
-console.log('tiny-deep-equal: ', tinyDeepEqual(obj1, obj2));
+console.log('tiny-is-equal: ', tinyIsEqual(obj1, obj2));
 
 summary(() => {
   bench('underscore', () => {
@@ -75,8 +75,8 @@ summary(() => {
   bench('fast-deep-equal', () => {
     return fastDeepEqual(obj1, obj2);
   });
-  bench('tiny-deep-equal', () => {
-    return tinyDeepEqual(obj1, obj2);
+  bench('tiny-is-equal', () => {
+    return tinyIsEqual(obj1, obj2);
   });
 });
 

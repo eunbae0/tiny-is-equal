@@ -1,11 +1,11 @@
 {
-  "name": "tiny-deep-equal",
+  "name": "tiny-is-equal",
   "version": "0.0.7",
   "description": "Tiny & Fast deep-equal check with various ES6 objects.",
-  "bugs": "https://github.com/eunbae0/tiny-deep-equal/issues",
+  "bugs": "https://github.com/eunbae0/tiny-is-equal/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eunbae0/tiny-deep-equal"
+    "url": "https://github.com/eunbae0/tiny-is-equal"
   },
   "type": "module",
   "exports": {
@@ -18,9 +18,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rslib build",
     "check": "biome check --write",
@@ -46,11 +44,12 @@
     "vitest": "^2.1.4"
   },
   "keywords": [
-    "tiny-deep-equal",
+    "tiny-is-equal",
     "tiny",
+    "is-equal",
+    "equal",
     "deep-equal",
     "deep-eql",
-    "equal",
     "object"
   ],
   "license": "MIT",

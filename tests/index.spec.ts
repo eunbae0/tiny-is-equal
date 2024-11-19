@@ -1,7 +1,7 @@
 import equal from '../src';
 import { describe, it, expect } from 'vitest';
 
-describe('equal', () => {
+describe('isEqual', () => {
   // Primitive Values
   it('should return true when comparing equal primitive values', () => {
     expect(equal(1, 1)).toBe(true);
