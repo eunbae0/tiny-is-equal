@@ -1,4 +1,4 @@
-name: Deploy Package to NPM
+name: Deploy and Release Package
 
 on:
   workflow_dispatch:
@@ -8,6 +8,10 @@ on:
         required: true
         default: 'v1.0.0'
         type: string # 'v[0-9]+.[0-9]+.[0-9]+'
+      release_body:
+        description: 'Release body'
+        default: ''
+        type: string
 
 jobs:
   publish_npm:
@@ -42,10 +46,11 @@ jobs:
       - name: Build dist files
         run: pnpm run build
 
+      # Deploy package to NPM
       - name: Bump Version of package.json
         uses: ramonpaolo/bump-version@v2.3.1
         with:
-          tag: ${{ inputs.tags }} # Accessing the context and get the reference_name, that in this case, is the tag that you created(ex: v1.0.0)
+          tag: ${{ inputs.tags }}
           commit: true
           branch_to_push: 'main'
 
@@ -53,3 +58,27 @@ jobs:
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Release package to Github
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          tag_name: ${{ inputs.tags }}
+          release_name: ${{ inputs.tags }}
+          body: ${{ inputs.release_body }}
+          draft: false
+          prerelease: false
+      
+      - name: Upload Release Assets
+        id: upload_release_assets
+        uses: actions/upload-release-asset@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/index.js
+          asset_name: tiny_deep_equal.js
+          asset_content_type: application/javascript
