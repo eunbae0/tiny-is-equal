@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Build dist files
+        run: pnpm run build
+
       - name: Bump Version of package.json
         uses: ramonpaolo/bump-version@v2.3.1
         with:
