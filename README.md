@@ -3,10 +3,10 @@
 > Tiny & Fast is-equal check with various ES6 objects.
 
 [![NPM version](https://img.shields.io/npm/v/tiny-is-equal.svg?style=flat)](https://www.npmjs.com/package/tiny-is-equal) [![monthly downloads](https://img.shields.io/npm/dm/tiny-is-equal.svg?maxAge=3600)](https://npmjs.com/package/tiny-is-equal)
-<a href="https://pkg-size.dev/tiny-is-equal"><img src="https://pkg-size.dev/badge/bundle/1359" title="Bundle size for tiny-is-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-is-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-is-equal/dist/index.js)
+<a href="https://pkg-size.dev/tiny-is-equal"><img src="https://pkg-size.dev/badge/bundle/1276" title="Bundle size for tiny-is-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-is-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-is-equal/dist/index.js)
 
 - **No dependencies.**
-- **Tiny bundle size.** (NPM Minified: **1.4kB**, Gzipped: **574B**)
+- **Tiny bundle size.** (NPM Minified: **1.3kB**, Gzipped: **574B**)
 - Support for both **CJS and ESM**.
 - **Typescript** based code, support type declarations.
 - Comprehensive test coverage.
