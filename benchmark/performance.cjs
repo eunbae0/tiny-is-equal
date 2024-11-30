@@ -3,12 +3,11 @@ const suite = new Benchmark.Suite();
 
 const { isEqual: underscoreIsEqual } = require('underscore');
 const { isEqual: lodashIsEqual } = require('lodash');
-const { equals: ramdaEquals } = require('ramda');
 const { isEqual: esToolkitisEqual } = require('es-toolkit');
 const fastDeepEqual = require('fast-deep-equal');
 const tinyIsEqual = require('../dist/index.cjs').default;
 
-const longArray = Array.from({ length: 1000000 }, (_, i) => i);
+const longArray = Array.from({ length: 1000 }, (_, i) => i);
 const longRegex =
   /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,100}$/g;
 const longString =
@@ -31,18 +30,31 @@ const sampleObj = {
   k: new DataView(new Uint8Array(longArray).buffer),
 };
 
+const sampleObj2 = {
+  a: Number.NaN,
+  b: longString,
+  c: longArray,
+  d: new Set(longArray),
+  e: longMap,
+  f: longRegex,
+  g: new Error(longString),
+  h: new Date('2000-01-01'),
+  i: new Uint8Array(longArray).buffer,
+  j: new Uint8Array(longArray),
+  k: new DataView(new Uint8Array(longArray).buffer),
+};
+
 const obj1 = {
   ...sampleObj,
   nestedObj: { ...sampleObj, deepNestedObj: { ...sampleObj } },
 };
 const obj2 = {
-  ...sampleObj,
-  nestedObj: { ...sampleObj, deepNestedObj: { ...sampleObj } },
+  ...sampleObj2,
+  nestedObj: { ...sampleObj2, deepNestedObj: { ...sampleObj2 } },
 };
 
 console.log('underscore: ', underscoreIsEqual(obj1, obj2));
 console.log('lodash: ', lodashIsEqual(obj1, obj2));
-console.log('ramda: ', ramdaEquals(obj1, obj2));
 console.log('es-toolkit: ', esToolkitisEqual(obj1, obj2));
 console.log('fast-deep-equal: ', fastDeepEqual(obj1, obj2));
 console.log('tiny-is-equal: ', tinyIsEqual(obj1, obj2));
@@ -61,9 +73,6 @@ suite.add('lodash.isEqual', () => {
 });
 suite.add('es-toolkit.isEqual', () => {
   return esToolkitisEqual(obj1, obj2);
-});
-suite.add('ramda.equals', () => {
-  return ramdaEquals(obj1, obj2);
 });
 
 suite

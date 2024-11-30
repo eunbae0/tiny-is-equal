@@ -3,14 +3,14 @@ import { run, bench, summary } from 'mitata';
 import { isEqual as underscoreIsEqual } from 'underscore';
 import lodash from 'lodash';
 const { isEqual: lodashIsEqual } = lodash;
-import { equals as ramdaEquals } from 'ramda';
 import deepEql from 'deep-eql';
 import deepEqual from 'deep-equal';
 import { isEqual as esToolkitisEqual } from 'es-toolkit';
+import { dequal } from 'dequal';
 import fastDeepEqual from 'fast-deep-equal';
 import tinyIsEqual from '../dist/index.js';
 
-const longArray = Array.from({ length: 1000000 }, (_, i) => i);
+const longArray = Array.from({ length: 100 }, (_, i) => i);
 const longRegex =
   /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,100}$/g;
 const longString =
@@ -33,6 +33,23 @@ const sampleObj = {
   k: new DataView(new Uint8Array(longArray).buffer),
   l: new WeakSet(),
   m: new WeakMap(),
+  n: tinyIsEqual,
+};
+const sampleObj2 = {
+  a: Number.NaN,
+  b: longString,
+  c: longArray,
+  d: new Set(longArray),
+  e: longMap,
+  f: longRegex,
+  g: new Error(longString),
+  h: new Date('2000-01-01'),
+  i: new Uint8Array(longArray).buffer,
+  j: new Uint8Array(longArray),
+  k: new DataView(new Uint8Array(longArray).buffer),
+  l: new WeakSet(),
+  m: new WeakMap(),
+  n: tinyIsEqual,
 };
 
 const obj1 = {
@@ -40,16 +57,18 @@ const obj1 = {
   nestedObj: { ...sampleObj, deepNestedObj: { ...sampleObj } },
 };
 const obj2 = {
-  ...sampleObj,
-  nestedObj: { ...sampleObj, deepNestedObj: { ...sampleObj } },
+  ...sampleObj2,
+  nestedObj: { ...sampleObj2, deepNestedObj: { ...sampleObj2 } },
 };
 
+console.log(obj1.m === obj2.m);
+
 console.log('underscore: ', underscoreIsEqual(obj1, obj2));
-console.log('lodash: ', lodashIsEqual(obj1, obj2));
-console.log('ramda: ', ramdaEquals(obj1, obj2));
+// console.log('lodash: ', lodashIsEqual(obj1, obj2));
 console.log('deep-eql: ', deepEql(obj1, obj2));
 console.log('deep-equal: ', deepEqual(obj1, obj2)); // false
 console.log('es-toolkit: ', esToolkitisEqual(obj1, obj2));
+console.log('dequal: ', dequal(obj1, obj2));
 console.log('fast-deep-equal: ', fastDeepEqual(obj1, obj2));
 console.log('tiny-is-equal: ', tinyIsEqual(obj1, obj2));
 
@@ -60,9 +79,6 @@ summary(() => {
   bench('lodash', () => {
     return lodashIsEqual(obj1, obj2);
   });
-  bench('ramda', () => {
-    return ramdaEquals(obj1, obj2);
-  });
   bench('deep-eql', () => {
     return deepEql(obj1, obj2);
   });
@@ -71,6 +87,9 @@ summary(() => {
   });
   bench('es-toolkit', () => {
     return esToolkitisEqual(obj1, obj2);
+  });
+  bench('dequal', () => {
+    return dequal(obj1, obj2);
   });
   bench('fast-deep-equal', () => {
     return fastDeepEqual(obj1, obj2);
