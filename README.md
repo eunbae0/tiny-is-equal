@@ -3,13 +3,17 @@
 > Tiny & Fast is-equal check with various ES6 objects.
 
 [![NPM version](https://img.shields.io/npm/v/tiny-is-equal.svg?style=flat)](https://www.npmjs.com/package/tiny-is-equal) [![monthly downloads](https://img.shields.io/npm/dm/tiny-is-equal.svg?maxAge=3600)](https://npmjs.com/package/tiny-is-equal)
-<a href="https://pkg-size.dev/tiny-is-equal"><img src="https://pkg-size.dev/badge/bundle/1276" title="Bundle size for tiny-is-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-is-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-is-equal/dist/index.js)
+<a href="https://pkg-size.dev/tiny-is-equal"><img src="https://pkg-size.dev/badge/bundle/1208" title="Bundle size for tiny-is-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-is-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-is-equal/dist/index.js)
 
 - **No dependencies.**
 - **Tiny bundle size.** (NPM Minified: **1.3kB**, Gzipped: **574B**)
 - Support for both **CJS and ESM**.
 - **Typescript** based code, support type declarations.
 - Comprehensive test coverage.
+
+#### TODO
+
+- [ ] Support for `WeakSet` & `WeakMap`.
 
 ## Install
 
@@ -89,17 +93,43 @@ expect(isEqual(err1, err2)) // true
 
 ## BenchMarks
 
-Benchmark for complex use cases:
-```shell
-$ pnpm run benchmark:performance
+### Environment
 
-tiny-is-equal x 612,580 ops/sec ±0.36% (98 runs sampled)
-fast-deep-equal x 662,205 ops/sec ±0.18% (97 runs sampled)
-underscore.isEqual x 526,323 ops/sec ±0.26% (98 runs sampled)
-lodash.isEqual x 314,708 ops/sec ±0.26% (99 runs sampled)
-es-toolkit.isEqual x 291,580 ops/sec ±1.70% (93 runs sampled)
-ramda.equals x 214,842 ops/sec ±0.50% (95 runs sampled)
+```shell
+clk: ~1.88 GHz
+cpu: Apple M2
+runtime: node 23.2.0 (arm64-darwin)
 ```
+
+### Benchmark for simple use case
+
+```diff
+$ pnpm run benchmark:simple
+
++ tiny-is-equal x 1,123,456 ops/sec ±0.25% (98 runs sampled)
+dequal x 774,522 ops/sec ±0.21% (98 runs sampled)
+fast-deep-equal x 600,823 ops/sec ±1.01% (92 runs sampled)
+underscore.isEqual x 255,012 ops/sec ±0.35% (97 runs sampled)
+es-toolkit.isEqual x 217,138 ops/sec ±0.09% (94 runs sampled)
+lodash.isEqual x 107,261 ops/sec ±0.24% (98 runs sampled)
+deep-equal x 508 ops/sec ±2.77% (73 runs sampled)
+```
+
+### Benchmark for complex use case
+
+```diff
+$ pnpm run benchmark:complex
+
++ tiny-is-equal x 139,032 ops/sec ±0.15% (97 runs sampled)
+dequal x 164,526 ops/sec ±0.89% (98 runs sampled)
+fast-deep-equal x 55,848 ops/sec ±4.45% (92 runs sampled)
+underscore.isEqual x 85,663 ops/sec ±0.72% (95 runs sampled)
+lodash.isEqual x 4,708 ops/sec ±3.68% (96 runs sampled)
+es-toolkit.isEqual x 30,110 ops/sec ±0.29% (101 runs sampled)
+deep-equal x 419 ops/sec ±1.72% (80 runs sampled)
+```
+
+You can see the detailed benchmark results in [benchmark](./benchmark/README.md).
 
 ## Test
 
