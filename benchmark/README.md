@@ -8,6 +8,10 @@ cpu: Apple M2
 runtime: node 23.2.0 (arm64-darwin)
 ```
 
+- All benchmarks are run in `node --trace-gc` mode.
+- Use [benchmark.js](https://github.com/bestiejs/benchmark.js) to run benchmarks in CommonJS environment.
+- Use [mitata](https://github.com/evanwashere/mitata) to run benchmarks in ESM environment.
+
 ## Benchmark for simple use case (cjs)
 
 ```diff
@@ -24,9 +28,7 @@ deep-equal x 508 ops/sec ±2.77% (73 runs sampled)
 
 ## Benchmark for simple use case (mjs)
 
-
 ```diff
-
 benchmark              avg (min … max) p75   p99    (min … top 1%)
 -------------------------------------- -------------------------------
 underscore                4.16 µs/iter   3.96 µs  █                   
@@ -107,4 +109,4 @@ summary
 ## Summary
 
 - `tiny-is-equal` is the fastest library for simple use case.
-- In complex use case, `tiny-is-equal` is 1.08x faster than `dequal`.
+- In complex use case, `tiny-is-equal` is 1.08x slower than `dequal`. But it's still faster than other libraries.
