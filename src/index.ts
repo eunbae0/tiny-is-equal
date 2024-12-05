@@ -7,10 +7,15 @@ const equal = <T>(a: T, b: T): boolean => {
   if (typeof a !== typeof b) return false;
 
   // Objects are Array
-  if (Array.isArray(a)) {
-    if (a.length !== (b as any[]).length) return false;
-    return a.every((aValue, i) => equal(aValue, (b as any[])[i]));
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (!equal(a[i], b[i])) return false;
+    }
+    return true;
   }
+
+  if ((a as Object).constructor !== (b as Object).constructor) return false;
 
   switch ((a as Object).constructor as TestedConstructor) {
     case Date:
@@ -23,7 +28,6 @@ const equal = <T>(a: T, b: T): boolean => {
 
       for (const aValue of aSet) {
         if (typeof aValue === 'object' && aValue !== null) {
-          // For objects, need to check deep equality
           let found = false;
           for (const bValue of bSet) {
             if (typeof bValue === 'object' && equal(aValue, bValue)) {
@@ -33,7 +37,6 @@ const equal = <T>(a: T, b: T): boolean => {
           }
           if (!found) return false;
         } else {
-          // For primitives, can use has() directly
           if (!bSet.has(aValue)) return false;
         }
       }
@@ -86,6 +89,12 @@ const equal = <T>(a: T, b: T): boolean => {
         if (aView.getUint8(i) !== bView.getUint8(i)) return false;
       }
       return true;
+    }
+
+    case Function: {
+      const aFunc = a as Function;
+      const bFunc = b as Function;
+      return aFunc.toString() === bFunc.toString();
     }
 
     case Object: {
