@@ -18,16 +18,15 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rslib build",
     "check": "biome check --write",
     "dev": "rslib build --watch",
     "format": "biome format --write",
     "test": "vitest run",
-    "benchmark:performance": "node benchmark/performance.cjs benchmark/performance.mjs --expose-gc"
+    "benchmark:simple": "node benchmark/simple/performance.cjs --export-gc && node benchmark/simple/performance.mjs --expose-gc",
+    "benchmark:complex": "node benchmark/complex/performance.cjs --export-gc && node benchmark/complex/performance.mjs --expose-gc"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.3",
