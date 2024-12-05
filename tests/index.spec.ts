@@ -207,9 +207,16 @@ describe('isEqual', () => {
   });
 
   // // TypedArrays
-  it('should return true when comparing equal TypedArrays', () => {
+  it('should return true when comparing equal TypedArrays, Uint8Array', () => {
     const buffer1 = new Uint8Array([1, 2, 3]);
     const buffer2 = new Uint8Array([1, 2, 3]);
+
+    expect(equal(buffer1, buffer2)).toBe(true);
+  });
+
+  it('should return true when comparing equal TypedArrays, Uint16Array', () => {
+    const buffer1 = new Uint16Array([1, 2, 3]);
+    const buffer2 = new Uint16Array([1, 2, 3]);
 
     expect(equal(buffer1, buffer2)).toBe(true);
   });
