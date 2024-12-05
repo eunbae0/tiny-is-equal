@@ -9,7 +9,7 @@
 - **Tiny bundle size.** (NPM Minified: **1.2kB**, Gzipped: **574B**)
 - Support for both **CJS and ESM**.
 - **Typescript** based code, support type declarations.
-- Comprehensive test coverage.
+- Comprehensive [test coverage](./tests/index.spec.ts).
 
 #### TODO
 
