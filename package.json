@@ -1,6 +1,6 @@
 {
   "name": "tiny-is-equal",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Tiny & Fast is-equal check with various ES6 objects.",
   "bugs": "https://github.com/eunbae0/tiny-is-equal/issues",
   "repository": {
@@ -18,7 +18,9 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rslib build",
     "check": "biome check --write",
