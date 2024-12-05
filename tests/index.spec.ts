@@ -37,7 +37,43 @@ describe('isEqual', () => {
     expect(equal(+0, -0)).toBe(true);
   });
 
+  it('should return false when comparing 1 and true', () => {
+    // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'number'
+    expect(equal(1, true)).toBe(false);
+  });
+
+  it('should return false when comparing 0 and false', () => {
+    // @ts-expect-error: Argument of type 'boolean' is not assignable to parameter of type 'number'
+    expect(equal(0, false)).toBe(false);
+  });
+
+  it('should return true when comparing null', () => {
+    expect(equal(null, null)).toBe(true);
+  });
+
+  it('should return true when comparing Infinity', () => {
+    expect(equal(Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY)).toBe(
+      true,
+    );
+  });
+
+  it('should return true when comparing -Infinity', () => {
+    expect(equal(Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY)).toBe(
+      true,
+    );
+  });
+
+  it('should return false when comparing Infinity and -Infinity', () => {
+    expect(equal(Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY)).toBe(
+      false,
+    );
+  });
+
   // Objects
+  it('should return false when comparing extra undefined properties', () => {
+    expect(equal({}, { foo: undefined })).toBe(false);
+  });
+
   // // Arrays
   it('should return true when comparing deeply equal arrays', () => {
     const arr1 = [1, 2, 3, 4];
@@ -60,6 +96,14 @@ describe('isEqual', () => {
     expect(equal(arr1, arr2)).toBe(false);
   });
 
+  it('should return false when comparing pseudo array and equivalent array', () => {
+    const arr1 = [1, 2, 3];
+    const arr2 = { 0: 1, 1: 2, 2: 3, length: 3 };
+
+    // @ts-expect-error: Argument of type '{ 0: number; 1: number; 2: number; length: number; }' is not assignable to parameter of type 'number[]'
+    expect(equal(arr1, arr2)).toBe(false);
+  });
+
   // // Dates
   it('should return true when comparing equal Date objects', () => {
     const date1 = new Date('2000-01-01');
@@ -70,6 +114,13 @@ describe('isEqual', () => {
   it('should return false when comparing different Date objects', () => {
     const date1 = new Date('2000-01-01');
     const date2 = new Date('2000-01-02');
+    expect(equal(date1, date2)).toBe(false);
+  });
+
+  it('should return false when comparing Date objects and string', () => {
+    const date1 = new Date('2000-01-01');
+    const date2 = '2000-01-01T00:00:00.000Z';
+    // @ts-expect-error: Argument of type 'string' is not assignable to parameter of type 'Date'
     expect(equal(date1, date2)).toBe(false);
   });
 
@@ -207,23 +258,58 @@ describe('isEqual', () => {
   });
 
   // // TypedArrays
-  it('should return true when comparing equal TypedArrays, Uint8Array', () => {
+  it('should return true when comparing equal TypedArrays (Uint8Array)', () => {
     const buffer1 = new Uint8Array([1, 2, 3]);
     const buffer2 = new Uint8Array([1, 2, 3]);
 
     expect(equal(buffer1, buffer2)).toBe(true);
   });
 
-  it('should return true when comparing equal TypedArrays, Uint16Array', () => {
+  it('should return true when comparing equal TypedArrays (Uint16Array)', () => {
     const buffer1 = new Uint16Array([1, 2, 3]);
     const buffer2 = new Uint16Array([1, 2, 3]);
 
     expect(equal(buffer1, buffer2)).toBe(true);
   });
 
-  it('should return false when comparing diffrent TypedArrays', () => {
+  it('should return true when comparing equal TypedArrays (Uint32Array)', () => {
+    const buffer1 = new Uint32Array([1, 2, 3]);
+    const buffer2 = new Uint32Array([1, 2, 3]);
+
+    expect(equal(buffer1, buffer2)).toBe(true);
+  });
+
+  it('should return true when comparing equal TypedArrays (Uint8ClampedArray)', () => {
+    const buffer1 = new Uint8ClampedArray([1, 2, 3]);
+    const buffer2 = new Uint8ClampedArray([1, 2, 3]);
+
+    expect(equal(buffer1, buffer2)).toBe(true);
+  });
+
+  it('should return false when comparing diffrent TypedArrays (Uint8Array)', () => {
     const buffer1 = new Uint8Array([1, 2, 3]);
     const buffer2 = new Uint8Array([1, 2, 4]);
+
+    expect(equal(buffer1, buffer2)).toBe(false);
+  });
+
+  it('should return false when comparing diffrent TypedArrays (Uint16Array)', () => {
+    const buffer1 = new Uint16Array([1, 2, 3]);
+    const buffer2 = new Uint16Array([1, 2, 4]);
+
+    expect(equal(buffer1, buffer2)).toBe(false);
+  });
+
+  it('should return false when comparing diffrent TypedArrays (Uint32Array)', () => {
+    const buffer1 = new Uint32Array([1, 2, 3]);
+    const buffer2 = new Uint32Array([1, 2, 4]);
+
+    expect(equal(buffer1, buffer2)).toBe(false);
+  });
+
+  it('should return false when comparing diffrent TypedArrays (Uint8ClampedArray)', () => {
+    const buffer1 = new Uint8ClampedArray([1, 2, 3]);
+    const buffer2 = new Uint8ClampedArray([1, 2, 4]);
 
     expect(equal(buffer1, buffer2)).toBe(false);
   });
@@ -278,17 +364,49 @@ describe('isEqual', () => {
     expect(equal(err1, err2)).toBe(false);
   });
 
+  // // Function
+
+  it('shoud return true when comparing objects with same toString function', () => {
+    const obj1 = { toString: () => 'Hello world!' };
+    const obj2 = { toString: () => 'Hello world!' };
+
+    expect(equal(obj1, obj2)).toBe(true);
+  });
+
+  it('shoud return false when comparing objects with diffrent toString function', () => {
+    const obj1 = { toString: () => 'Hello world!' };
+    const obj2 = { toString: () => 'Hi!' };
+
+    expect(equal(obj1, obj2)).toBe(false);
+  });
+
   // // Deep Object
   it('should return true when comparing deeply equal objects', () => {
-    const obj1 = { a: 1, b: { c: 1 } };
-    const obj2 = { a: 1, b: { c: 1 } };
+    const obj1 = {
+      a: 1,
+      b: { c: 1, d: { e: 1 } },
+      f: new Date('2000-01-01'),
+    };
+    const obj2 = {
+      a: 1,
+      b: { c: 1, d: { e: 1 } },
+      f: new Date('2000-01-01'),
+    };
 
     expect(equal(obj1, obj2)).toBe(true);
   });
 
   it('should return false when comparing diffrent objects', () => {
-    const obj1 = { a: 1, b: { c: 1 } };
-    const obj2 = { a: 1, b: { c: 2 } };
+    const obj1 = {
+      a: 1,
+      b: { c: 1, d: { e: 1 } },
+      f: new Date('2000-01-01'),
+    };
+    const obj2 = {
+      a: 1,
+      b: { c: 1, d: { e: 2 } },
+      f: new Date('2000-01-01'),
+    };
 
     expect(equal(obj1, obj2)).toBe(false);
   });
