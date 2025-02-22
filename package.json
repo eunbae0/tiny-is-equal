@@ -1,11 +1,11 @@
 {
-  "name": "tiny-is-equal",
+  "name": "tiny-equal",
   "version": "1.1.1",
-  "description": "Tiny & Fast is-equal check with various ES6 objects.",
-  "bugs": "https://github.com/eunbae0/tiny-is-equal/issues",
+  "description": "Tiny & Fastest is-equal check with various ES6 objects.",
+  "bugs": "https://github.com/eunbae0/tiny-equal/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eunbae0/tiny-is-equal"
+    "url": "https://github.com/eunbae0/tiny-equal"
   },
   "type": "module",
   "exports": {
@@ -18,9 +18,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rslib build",
     "check": "biome check --write",
@@ -47,7 +45,7 @@
     "vitest": "^2.1.4"
   },
   "keywords": [
-    "tiny-is-equal",
+    "tiny-equal",
     "tiny",
     "is-equal",
     "equal",

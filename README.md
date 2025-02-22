@@ -1,9 +1,9 @@
-# tiny-is-equal
+# tiny-equal
 
-> Tiny & Fast is-equal check with various ES6 objects.
+> Tiny & Fastest is-equal check with various ES6 objects.
 
-[![NPM version](https://img.shields.io/npm/v/tiny-is-equal.svg?style=flat)](https://www.npmjs.com/package/tiny-is-equal) [![monthly downloads](https://img.shields.io/npm/dm/tiny-is-equal.svg?maxAge=3600)](https://npmjs.com/package/tiny-is-equal)
-<a href="https://pkg-size.dev/tiny-is-equal"><img src="https://pkg-size.dev/badge/bundle/1208" title="Bundle size for tiny-is-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-is-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-is-equal/dist/index.js)
+[![NPM version](https://img.shields.io/npm/v/tiny-equal.svg?style=flat)](https://www.npmjs.com/package/tiny-equal) [![monthly downloads](https://img.shields.io/npm/dm/tiny-equal.svg?maxAge=3600)](https://npmjs.com/package/tiny-equal)
+<a href="https://pkg-size.dev/tiny-equal"><img src="https://pkg-size.dev/badge/bundle/1208" title="Bundle size for tiny-equal"></a> [![bundle size](http://img.badgesize.io/https://unpkg.com/tiny-equal/dist/index.js?compression=gzip)](https://unpkg.com/tiny-equal/dist/index.js)
 
 - **No dependencies.**
 - **Tiny bundle size.** (NPM Minified: **1.2kB**, Gzipped: **574B**)
@@ -19,26 +19,26 @@
 ## Install
 
 ```shell
-$ npm install tiny-is-equal --save # npm
-$ yarn add tiny-is-equal # yarn
-$ pnpm install tiny-is-equal # pnpm
+$ npm install tiny-equal --save # npm
+$ yarn add tiny-equal # yarn
+$ pnpm install tiny-equal # pnpm
 ```
 
 ## Usage
 
 ```javascript
 // esm
-import isEqual from 'tiny-is-equal';
+import isEqual from 'tiny-equal';
 
 isEqual({ a: 1, b: { c: 1 } }, { a: 1, b: { c: 1 } }) // true
 
 // cjs
-const isEqual = require('tiny-is-equal');
+const isEqual = require('tiny-equal');
 
 isEqual({ a: 1, b: { c: 1 } }, { a: 1, b: { c: 1 } }) // true
 ```
 
-tiny-is-equal supports various objects with ES6.
+tiny-equal supports various objects with ES6.
 
 ### +0 & -0
 
@@ -105,7 +105,7 @@ runtime: node 23.2.0 (arm64-darwin)
 ```diff
 $ pnpm run benchmark:simple
 
-+ tiny-is-equal x 1,123,456 ops/sec ±0.25% (98 runs sampled)
++ tiny-equal x 1,123,456 ops/sec ±0.25% (98 runs sampled)
 dequal x 774,522 ops/sec ±0.21% (98 runs sampled)
 fast-deep-equal x 600,823 ops/sec ±1.01% (92 runs sampled)
 underscore.isEqual x 255,012 ops/sec ±0.35% (97 runs sampled)
@@ -119,7 +119,7 @@ deep-equal x 508 ops/sec ±2.77% (73 runs sampled)
 ```diff
 $ pnpm run benchmark:complex
 
-+ tiny-is-equal x 139,032 ops/sec ±0.15% (97 runs sampled)
++ tiny-equal x 139,032 ops/sec ±0.15% (97 runs sampled)
 dequal x 164,526 ops/sec ±0.89% (98 runs sampled)
 fast-deep-equal x 55,848 ops/sec ±4.45% (92 runs sampled)
 underscore.isEqual x 85,663 ops/sec ±0.72% (95 runs sampled)
@@ -138,4 +138,4 @@ $ pnpm run test
 
 ## License
 
-[MIT](https://github.com/eunbae0/tiny-is-equal/blob/main/LICENSE)
+[MIT](https://github.com/eunbae0/tiny-equal/blob/main/LICENSE)

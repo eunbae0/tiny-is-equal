@@ -33,7 +33,7 @@ summary(() => {
   bench('fast-deep-equal', () => {
     return fastDeepEqual(simpleObj1, simpleObj2);
   });
-  bench('tiny-is-equal', () => {
+  bench('tiny-equal', () => {
     return tinyIsEqual(simpleObj1, simpleObj2);
   });
 });
